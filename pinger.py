@@ -1,5 +1,6 @@
 import time
 import httplib
+import os
 
 # Settings
 MACHINE_SERIAL = os.environ['ESO_MACHINE_SERIAL']
