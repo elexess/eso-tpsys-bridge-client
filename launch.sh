@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Colors
+
+RED="\e[31m"
+GREEN="\e[32m"
+ENDCOLOR="\e[0m"
+
 # Make sure that not screen session are forgotten, this is safe because tpsys doesn't utilize screen
 killall screen
 
@@ -26,17 +32,17 @@ do
     countERP=$(ping -c $COUNT $ESO_ERP_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
     if [ ${countERP:-$DEF} -eq 0 ]; then
         # 100% failed
-        echo -ne "[DOWN] $ESO_ERP_HOST, "
+        echo -ne "${RED}[ERP DOWN] $ESO_ERP_HOST / ${ENDCOLOR}"
     else
-        echo -ne "[UP] $ESO_ERP_HOST, "
+        echo -ne "${GREEN}[ERP UP] $ESO_ERP_HOST / ${ENDCOLOR}"
     fi
     # Is bridge alive?
     countBridge=$(ping -c $COUNT $ESO_BRIDGE_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
     if [ ${countBridge:-$DEF} -eq 0 ]; then
         # 100% failed
-        echo -ne "[DOWN] $ESO_BRIDGE_HOST"
+        echo -ne "${RED}[BRIDGE DOWN] $ESO_BRIDGE_HOST ${ENDCOLOR}"
     else
-        echo -ne "[UP] $ESO_BRIDGE_HOST"
+        echo -ne "${GREEN}[BRIDGE UP] $ESO_BRIDGE_HOST ${ENDCOLOR}"
     fi
     sleep 1
 done
