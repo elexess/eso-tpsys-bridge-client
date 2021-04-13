@@ -32,9 +32,9 @@ do
     countERP=$(ping -c $COUNT $ESO_ERP_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
     if [ ${countERP:-$DEF} -eq 0 ]; then
         # 100% failed
-        echo -ne "${RED}[ERP DOWN] $ESO_ERP_HOST / ${ENDCOLOR}"
+        echo -ne "${RED}[ERP DOWN] $ESO_ERP_HOST ${ENDCOLOR}"
     else
-        echo -ne "${GREEN}[ERP UP] $ESO_ERP_HOST / ${ENDCOLOR}"
+        echo -ne "${GREEN}[ERP UP] $ESO_ERP_HOST ${ENDCOLOR}"
     fi
     # Is bridge alive?
     countBridge=$(ping -c $COUNT $ESO_BRIDGE_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
