@@ -1,7 +1,9 @@
 #!/bin/bash
 
-# Colors
+# Load config
+source .env
 
+# Colors
 RED="\e[31m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
