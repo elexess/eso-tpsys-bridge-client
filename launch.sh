@@ -1,11 +1,6 @@
 #!/bin/bash
 
-# General Settings
-WATCHDOGPATH='/home/tpsys/watchdog.py'
-ERP_HOST='erp.eso-electronic.com'
-BRIGDE_HOST='192.168.100.5'
-
-# Make sure that not screen session are forgotten
+# Make sure that not screen session are forgotten, this is safe because tpsys doesn't utilize screen
 killall screen
 
 echo "[OK] TPSys Bridge started, Press [CTRL+C] to stop ..."
@@ -25,23 +20,23 @@ do
     echo -ne "$(date): "
     # Make sure python watchdog is running on the background
     if ! screen -list | grep -q "watchdog"; then
-     screen -dm -S watchdog bash -c "python $WATCHDOGPATH"
+     screen -dm -S watchdog bash -c "python $ESO_WATCHDOGPATH"
     fi
     # Is ERP alive?
-    countERP=$(ping -c $COUNT $ERP_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
+    countERP=$(ping -c $COUNT $ESO_ERP_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
     if [ ${countERP:-$DEF} -eq 0 ]; then
         # 100% failed
-        echo -ne "[DOWN] $ERP_HOST, "
+        echo -ne "[DOWN] $ESO_ERP_HOST, "
     else
-        echo -ne "[UP] $ERP_HOST, "
+        echo -ne "[UP] $ESO_ERP_HOST, "
     fi
     # Is bridge alive?
-    countBridge=$(ping -c $COUNT $BRIGDE_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
+    countBridge=$(ping -c $COUNT $ESO_BRIDGE_HOST | grep 'received' | awk -F',' '{ print $2 }' | awk '{ print $1 }')
     if [ ${countBridge:-$DEF} -eq 0 ]; then
         # 100% failed
-        echo -ne "[DOWN] $BRIGDE_HOST"
+        echo -ne "[DOWN] $ESO_BRIDGE_HOST"
     else
-        echo -ne "[UP] $BRIGDE_HOST"
+        echo -ne "[UP] $ESO_BRIDGE_HOST"
     fi
     sleep 1
 done

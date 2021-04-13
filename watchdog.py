@@ -1,13 +1,14 @@
 import time
+import os
 import httplib
 from string import find
 import re
 
 # Settings
-BRIDGE_LOCAL_IP = "192.168.100.5:8080"
-MACHINE_NAME = "MDE01"
-MACHINE_SERIAL_NUMBER = "130276"
-MACHINE_IP = "192.168.100.210"
+BRIDGE_LOCAL_IP = os.environ['ESO_BRIDGE_HOST_PORT']
+MACHINE_NAME = os.environ['ESO_MACHINE_NAME']
+MACHINE_SERIAL_NUMBER = os.environ['ESO_MACHINE_SERIAL']
+MACHINE_IP = os.environ['ESO_MACHINE_IP']
 FNAME = r"/home/tpsys/log/mhproc/log"
 
 # Init Start Values
