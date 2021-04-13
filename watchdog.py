@@ -6,7 +6,7 @@ import re
 from dotenv import load_dotenv
 
 
-import .env
+load_dotenv()
 
 # Settings
 BRIDGE_LOCAL_IP = os.environ['ESO_BRIDGE_HOST_PORT']

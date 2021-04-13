@@ -1,6 +1,9 @@
 import time
 import httplib
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Settings
 MACHINE_SERIAL = os.environ['ESO_MACHINE_SERIAL']
