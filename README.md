@@ -28,6 +28,11 @@ $ pip install -r requirements.txt
 
 ## Set the Environment Variables
 
+```
+$ cp .env.sample .env
+$ vim .env
+```
+
 This is an example for MDE01:
 
 ```
