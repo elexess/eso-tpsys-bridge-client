@@ -7,6 +7,8 @@ This is for Python 2.7
 ```
 $ su root
 $ sudo apt-get install git curl screen -y
+$ touch /var/log/tpsys_bridge_client.log
+$ chmod -R a+rw /var/log/tpsys_bridge_client.log
 $ python get-pip.py
 $ pip install --upgrade pip
 $ su tpsys
