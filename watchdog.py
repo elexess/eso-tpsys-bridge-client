@@ -18,10 +18,22 @@ logging.info("Start watchdog")
 logging.info("Load environment variables from .env")
 load_dotenv()
 BRIDGE_LOCAL_IP = os.environ['ESO_BRIDGE_HOST_PORT']
+ESO_ERP_HOST = os.environ['ESO_ERP_HOST']
 MACHINE_NAME = os.environ['ESO_MACHINE_NAME']
 MACHINE_SERIAL_NUMBER = os.environ['ESO_MACHINE_SERIAL']
 MACHINE_IP = os.environ['ESO_MACHINE_IP']
 MACHINE_LOGFILE = r"/home/tpsys/log/mhproc/log"
+
+# Print Launch config
+
+print("\n\n")
+print("Launch Configuration:")
+print(" - Machine Name: " + MACHINE_NAME)
+print(" - Machine Serial Number: " + MACHINE_SERIAL_NUMBER)
+print(" - Machine IP: " + MACHINE_IP)
+print(" - ERPNext Host: " + ESO_ERP_HOST)
+print(" - Bridge IP: "+ BRIDGE_LOCAL_IP)
+print("\n")
 
 # Init Start Values
 CAN_PROCESS = 0

@@ -4,15 +4,25 @@
 
 This is for Python 2.7
 
+As root user:
+
 ```
 $ su root
-$ sudo apt-get install git curl screen -y
+$ sudo apt-get install git curl screen vim -y
 $ touch /var/log/tpsys_bridge_client.log
 $ chmod -R a+rw /var/log/tpsys_bridge_client.log
+$ curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o get-pip.py
 $ python get-pip.py
+$ rm get-pip.py
 $ pip install --upgrade pip
+```
+
+As tpsys user:
+
+```
 $ su tpsys
-$ git clone https://github.com/elexess/eso-tpsys-bridge-client.git $ $ cd tpsys_bridge
+$ git clone https://github.com/elexess/eso-tpsys-bridge-client.git tpsys_bridge
+$ cd tpsys_bridge
 $ pip install -r requirements.txt
 ```
 
