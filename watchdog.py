@@ -4,11 +4,15 @@ import httplib
 from string import find
 import re
 from dotenv import load_dotenv
+import logging
 
-
-load_dotenv()
+# Setting log verbosity
+logging.basicConfig(level=logging.INFO, filename='/var/log/tpsys_bridge.log)
+logging.info("Start watchdog")
 
 # Settings
+logging.info("Load environment variables from .env")
+load_dotenv()
 BRIDGE_LOCAL_IP = os.environ['ESO_BRIDGE_HOST_PORT']
 MACHINE_NAME = os.environ['ESO_MACHINE_NAME']
 MACHINE_SERIAL_NUMBER = os.environ['ESO_MACHINE_SERIAL']
@@ -38,12 +42,13 @@ def broadcast_action(action, slot, type, serial, feeder, x, y , yvalid, angle):
     params = add2str(params, '&cl_x='+ x)
     params = add2str(params, '&cl_y='+ y)
     params = add2str(params, '&cl_angle='+ angle)
-    print("POSTING:", BRIDGE_LOCAL_IP + "/machine/action" + params)
+    logging.info("Making post to bridge:", BRIDGE_LOCAL_IP + "/machine/action" + params)
     conn.request("POST", "/machine/action" + params)
 
 
 def process_action(line):
     """Process new line (new action)"""
+    logging.info("New line in log file recognized")
     sline = line.split()
     action = None
     slot = 'NA'
@@ -57,23 +62,25 @@ def process_action(line):
     if not line:
          return
     if 'TEX' in sline:
-         print("tex")
+         logging.info("tex")
          return
     if find(sline[1], 'MIMHButtonPressed') >= 0:
         action = 'BTN' # Button Pressed
         slot = re.findall(r'\d+', sline[2])[0]
+        logging.info("Button pressed recognized")
     if find(sline[1], 'MIMHMagRemoved') >= 0:
         action = 'MR' # Magazine Removed
         slot = re.findall(r'\d+', sline[2])[0]
+        logging.info("Magazine removed recognized")
     if find(sline[1], 'insertMag') >=0 :
         action = 'MI' # Magazine Inserted
         info = re.findall(r'\d+', sline[1])
         slot = info[4]
         type = info[3]
         serial = info[2]
+        logging.info("Magazine insert recognized")
     if action:
         broadcast_action(action, slot, type, serial, feeder, x, y , yvalid, angle)
-
 
 
 CAN_PROCESS = 0
@@ -86,5 +93,5 @@ while 1:
         time.sleep(1)
     else:
         if CAN_PROCESS:
-           print("Debug", line.split())
+           logging.info("Debug", line.split())
            process_action(line)
