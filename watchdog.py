@@ -8,7 +8,10 @@ import logging
 
 # Setting log verbosity
 print("Observe the log file live with '$ less +F /var/log/tpsys_bridge_client.log'")
-logging.basicConfig(level=logging.INFO, filename='/var/log/tpsys_bridge_client.log')
+logging.basicConfig(level=logging.INFO, 
+    filename='/var/log/tpsys_bridge_client.log', 
+    format='%(asctime)s %(message)s', 
+    datefmt='%m/%d/%Y %I:%M:%S %p')
 logging.info("Start watchdog")
 
 # Settings
@@ -18,11 +21,11 @@ BRIDGE_LOCAL_IP = os.environ['ESO_BRIDGE_HOST_PORT']
 MACHINE_NAME = os.environ['ESO_MACHINE_NAME']
 MACHINE_SERIAL_NUMBER = os.environ['ESO_MACHINE_SERIAL']
 MACHINE_IP = os.environ['ESO_MACHINE_IP']
-FNAME = r"/home/tpsys/log/mhproc/log"
+MACHINE_LOGFILE = r"/home/tpsys/log/mhproc/log"
 
 # Init Start Values
 CAN_PROCESS = 0
-f = open(FNAME, 'r')
+f = open(MACHINE_LOGFILE, 'r')
 
 def add2str(pr, ne):
     """Helper to concat"""
@@ -43,7 +46,7 @@ def broadcast_action(action, slot, type, serial, feeder, x, y , yvalid, angle):
     params = add2str(params, '&cl_x='+ x)
     params = add2str(params, '&cl_y='+ y)
     params = add2str(params, '&cl_angle='+ angle)
-    logging.info("Making post to bridge:", BRIDGE_LOCAL_IP + "/machine/action" + params)
+    logging.info("Making post to bridge" + BRIDGE_LOCAL_IP + "/machine/action" + params)
     conn.request("POST", "/machine/action" + params)
 
 
@@ -94,5 +97,5 @@ while 1:
         time.sleep(1)
     else:
         if CAN_PROCESS:
-           logging.info("Debug", line.split())
+           logging.info("Debug" + line.split())
            process_action(line)
