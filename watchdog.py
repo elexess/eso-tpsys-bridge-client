@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 import logging
 
 # Setting log verbosity
+print("Observe the log file live with '$ less +F /var/log/tpsys_bridge_client.log'")
 logging.basicConfig(level=logging.INFO, filename='/var/log/tpsys_bridge_client.log')
 logging.info("Start watchdog")
 

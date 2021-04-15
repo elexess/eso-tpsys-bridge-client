@@ -7,10 +7,12 @@ source .env
 RED="\e[31m"
 GREEN="\e[32m"
 ENDCOLOR="\e[0m"
+UNDERLINED="\e[4m"
 
 # Make sure that not screen session are forgotten, this is safe because tpsys doesn't utilize screen
 killall screen
 
+echo "{$UNDERLINED}Observe the log file live with '$ less +F /var/log/tpsys_bridge_client.log'${ENDCOLOR}"
 echo "[OK] TPSys Bridge started, Press [CTRL+C] to stop ..."
 
 # Traping Ctrl + C
