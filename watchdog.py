@@ -7,7 +7,7 @@ from dotenv import load_dotenv
 import logging
 
 # Setting log verbosity
-logging.basicConfig(level=logging.INFO, filename='/var/log/tpsys_bridge.log)
+logging.basicConfig(level=logging.INFO, filename='/var/log/tpsys_bridge.log')
 logging.info("Start watchdog")
 
 # Settings
