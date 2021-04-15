@@ -46,7 +46,7 @@ def broadcast_action(action, slot, type, serial, feeder, x, y , yvalid, angle):
     params = add2str(params, '&cl_x='+ x)
     params = add2str(params, '&cl_y='+ y)
     params = add2str(params, '&cl_angle='+ angle)
-    logging.info("Making post to bridge" + BRIDGE_LOCAL_IP + "/machine/action" + params)
+    logging.info("Making post to bridge" + BRIDGE_LOCAL_IP + "/machine/action" + str(params))
     conn.request("POST", "/machine/action" + params)
 
 
@@ -97,5 +97,5 @@ while 1:
         time.sleep(1)
     else:
         if CAN_PROCESS:
-           logging.info("Debug" + line.split())
+           logging.info("Debug" + str(line.split()))
            process_action(line)
