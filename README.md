@@ -1,5 +1,9 @@
 # eso-tpsys-client
 
+##
+
+Run with ```./tpsys_client/launch.ssh``` from the tpsys home folder
+
 ## Install 
 
 This is for Python 2.7
