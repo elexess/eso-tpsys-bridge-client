@@ -17,7 +17,7 @@ $ su root
 Edit apt-get packages and add Ubuntu standard packages
 
 ```
-$ sudo nano etc/apt/sources.list
+$ sudo nano /etc/apt/sources.list
 
 #------------------------------------------------------------------------------#
 #                            OFFICIAL UBUNTU REPOS                             #
@@ -39,6 +39,7 @@ deb-src http://de.archive.ubuntu.com/ubuntu/ trusty-proposed main restricted uni
 deb-src http://de.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse
 
 ```
+$ sudo apt-get update
 $ sudo apt-get install git curl screen vim -y
 $ touch /var/log/tpsys_bridge_client.log
 $ chmod -R a+rw /var/log/tpsys_bridge_client.log
