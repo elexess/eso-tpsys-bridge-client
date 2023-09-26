@@ -3,24 +3,18 @@ import os
 import httplib
 from string import find
 import re
-from dotenv import load_dotenv
 import logging
+from machine_config import *
 
 # Setting log verbosity
-logging.basicConfig(level=logging.INFO, 
-    filename='/var/log/tpsys_bridge_client.log', 
-    format='%(asctime)s %(message)s', 
+logging.basicConfig(level=logging.INFO,
+    filename='/var/log/tpsys_bridge_client.log',
+    format='%(asctime)s %(message)s',
     datefmt='%m/%d/%Y %I:%M:%S %p')
 logging.info("Start watchdog")
 
 # Settings
-logging.info("Load environment variables from .env")
-load_dotenv()
-BRIDGE_LOCAL_IP = os.environ['ESO_BRIDGE_HOST_PORT']
-ESO_ERP_HOST = os.environ['ESO_ERP_HOST']
-MACHINE_NAME = os.environ['ESO_MACHINE_NAME']
-MACHINE_SERIAL_NUMBER = os.environ['ESO_MACHINE_SERIAL']
-MACHINE_IP = os.environ['ESO_MACHINE_IP']
+logging.info("Load environment variables from conf.py file")
 MACHINE_LOGFILE = r"/home/tpsys/log/mhproc/log"
 
 # Print Launch config
@@ -31,7 +25,7 @@ print("Launch Configuration:")
 print(" - Machine Name: " + MACHINE_NAME)
 print(" - Machine Serial Number: " + MACHINE_SERIAL_NUMBER)
 print(" - Machine IP: " + MACHINE_IP)
-print(" - ERPNext Host: " + ESO_ERP_HOST)
+print(" - ERPNext Host: " + ERP_HOST)
 print(" - Bridge IP: "+ BRIDGE_LOCAL_IP)
 print("\n")
 
