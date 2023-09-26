@@ -23,7 +23,6 @@ $ sudo nano /etc/apt/sources.list
 #                            OFFICIAL UBUNTU REPOS                             #
 #------------------------------------------------------------------------------#
 
-
 ###### Ubuntu Main Repos
 deb http://de.archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse 
 deb-src http://de.archive.ubuntu.com/ubuntu/ trusty main restricted universe multiverse 
@@ -37,6 +36,7 @@ deb-src http://de.archive.ubuntu.com/ubuntu/ trusty-security main restricted uni
 deb-src http://de.archive.ubuntu.com/ubuntu/ trusty-updates main restricted universe multiverse 
 deb-src http://de.archive.ubuntu.com/ubuntu/ trusty-proposed main restricted universe multiverse 
 deb-src http://de.archive.ubuntu.com/ubuntu/ trusty-backports main restricted universe multiverse
+```
 
 ```
 $ sudo apt-get update
