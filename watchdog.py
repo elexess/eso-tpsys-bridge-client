@@ -27,6 +27,7 @@ print(" - Machine Serial Number: " + MACHINE_SERIAL_NUMBER)
 print(" - Machine IP: " + MACHINE_IP)
 print(" - ERPNext Host: " + ERP_HOST)
 print(" - Bridge IP: "+ BRIDGE_LOCAL_IP)
+print(" - Bridge Host and Port: "+ BRIDGE_HOST_PORT)
 print("\n")
 
 # Init Start Values
@@ -39,7 +40,7 @@ def add2str(pr, ne):
 
 def broadcast_action(action, slot, type, serial, feeder, x, y , yvalid, angle):
     """Make post request to local brigde"""
-    conn = httplib.HTTPConnection(BRIDGE_LOCAL_IP)
+    conn = httplib.HTTPConnection(BRIDGE_HOST_PORT)
     params = ''
     params = add2str(params, '?mc_ip='+ MACHINE_IP)
     params = add2str(params, '&mc_name='+ MACHINE_NAME)
@@ -52,7 +53,7 @@ def broadcast_action(action, slot, type, serial, feeder, x, y , yvalid, angle):
     params = add2str(params, '&cl_x='+ x)
     params = add2str(params, '&cl_y='+ y)
     params = add2str(params, '&cl_angle='+ angle)
-    logging.info("Making post to bridge" + BRIDGE_LOCAL_IP + "/machine/action" + str(params))
+    logging.info("Making post to bridge" + BRIDGE_HOST_PORT + "/machine/action" + str(params))
     conn.request("POST", "/machine/action" + params)
 
 
