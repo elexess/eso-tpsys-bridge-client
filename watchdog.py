@@ -14,7 +14,7 @@ logging.basicConfig(level=logging.INFO,
 logging.info("Start watchdog")
 
 # Settings
-logging.info("Load environment variables from conf.py file")
+logging.info("Load environment variables from machine_config.py file")
 MACHINE_LOGFILE = r"/home/tpsys/log/mhproc/log"
 
 # Print Launch config
